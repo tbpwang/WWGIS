@@ -34,10 +34,10 @@ public class ClassIEqual2ArcsView extends ApplicationTemplate
             {
                 trigons[i] = (Trigon) Octant.getInstance().getFacet(i);
             }
-            OctantMesh[] meshs = new OctantMesh[total];
+            OctantMeshEqualArcs[] meshs = new OctantMeshEqualArcs[total];
             for (int i = frm; i < to; i++)
             {
-                meshs[i] = new OctantMesh(trigons[i], level);
+                meshs[i] = new OctantMeshEqualArcs(trigons[i], level);
             }
             RenderableLayer[] layers = new RenderableLayer[total];
             for (int i = frm; i < to; i++)
@@ -48,7 +48,7 @@ public class ClassIEqual2ArcsView extends ApplicationTemplate
                 {
                     for (int k = 0; k < meshs[i].getTriangles()[j].length; k++)
                     {
-                        layers[i].addRenderable(meshs[i].getTriangles()[j][k].getTrigon());
+                        layers[i].addRenderable(meshs[i].getTriangles()[j][k].getSurfacePolygon());
                     }
                 }
                 insertBeforeCompass(getWwd(), layers[i]);

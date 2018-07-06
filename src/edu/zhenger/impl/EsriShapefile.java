@@ -31,6 +31,7 @@ public class EsriShapefile extends ApplicationTemplate
     {
         public AppFrame()
         {
+            super();
             ShapefileLayerFactory factory = new ShapefileLayerFactory();
 
             // Specify an attribute delegate to assign random attributes to each shapefile record.

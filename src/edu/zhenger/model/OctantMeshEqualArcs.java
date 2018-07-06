@@ -14,14 +14,15 @@ import gov.nasa.worldwind.geom.LatLon;
  * @Function: construction mesh of Class I and Mid-arcs without recursion. only 1/8 of globe
  * @Date: 2018/7/5
  */
-public class OctantMesh
+public class OctantMeshEqualArcs
 {
     // while p0 is the polar, p1 is a left point, and p2 is a right point
     private LatLon p1, p10, p20, p2;
     private int level;
+    //
     private Trigon[][] triangles;
 
-    public OctantMesh(LatLon top, LatLon left, LatLon right, int level)
+    public OctantMeshEqualArcs(LatLon top, LatLon left, LatLon right, int level)
     {
         this.level = level;
         this.p1 = left;
@@ -40,7 +41,7 @@ public class OctantMesh
         init();
     }
 
-    public OctantMesh(Trigon trigon, int level)
+    public OctantMeshEqualArcs(Trigon trigon, int level)
     {
         this.level = level;
         p1 = trigon.getLeft();

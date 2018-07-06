@@ -13,9 +13,7 @@ import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.render.*;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Author: WangZheng Email: tbpwang@gmail.com
@@ -27,10 +25,8 @@ public class Trigon implements Cell
     private Vec4 top, left, right;
     private LatLon center;
     private String geocode;
-    private Globe globe;
     private int orientation;//1向上；-1向下
-    private SurfacePolygon trigon;
-
+    private SurfacePolygon surfacePolygon;
 
     public Trigon(LatLon top, LatLon left, LatLon right, String geocode)
     {
@@ -38,19 +34,6 @@ public class Trigon implements Cell
         {
             throw new Mistake("nullValue: VertexIsNull");
         }
-
-        // initial triangles all is up
-        //orientation = 1;
-//        if (top.getLatitude().subtract(left.getLatitude()).getDegrees() > 0
-//            && top.getLatitude().subtract(right.getLatitude()).getDegrees() > 0)
-//        {
-//            orientation = 1;
-//        }
-//        if (top.getLatitude().subtract(left.getLatitude()).getDegrees() < 0
-//            && top.getLatitude().subtract(right.getLatitude()).getDegrees() < 0)
-//        {
-//            orientation = -1;
-//        }
 
         Vec4 a, b, c, d;
         a = Change.fromLatLon(top);
@@ -64,30 +47,27 @@ public class Trigon implements Cell
         this.geocode = geocode;
 
         this.center = new LatLon(Change.fromVec4(d));
-        this.globe = Change.getGlobe();
 
         List<LatLon> side = new ArrayList<>();
         side.add(top);
         side.add(left);
         side.add(right);
-//        ShapeAttributes attributes = new  BasicShapeAttributes();
-//        attributes.
-        trigon = new SurfacePolygon();
-        trigon.setLocations(side);
-        if (!trigon.getPathType().equals(AVKey.GREAT_CIRCLE))
-        {
-            System.out.println("Surface type: " + trigon.getPathType());
-            trigon.setPathType(AVKey.GREAT_CIRCLE);
-        }
 
+        surfacePolygon = new SurfacePolygon();
+        surfacePolygon.setLocations(side);
+        if (!surfacePolygon.getPathType().equals(AVKey.GREAT_CIRCLE))
+        {
+            System.out.println("Surface type: " + surfacePolygon.getPathType());
+            surfacePolygon.setPathType(AVKey.GREAT_CIRCLE);
+        }
     }
 
-    public SurfacePolygon getTrigon()
+    public SurfacePolygon getSurfacePolygon()
     {
         ShapeAttributes attributes = new BasicShapeAttributes();
         attributes.setInteriorOpacity(0.1);
-        trigon.setAttributes(attributes);
-        return trigon;
+        surfacePolygon.setAttributes(attributes);
+        return surfacePolygon;
     }
 
     public void setOrientation(int orientation)
@@ -97,18 +77,18 @@ public class Trigon implements Cell
 
     public double getArea()
     {
-        return getArea(globe);
+        return getArea(Change.getGlobe());
     }
 
     public double getPerimeter()
     {
-        return getPerimeter(globe);
+        return getPerimeter(Change.getGlobe());
     }
 
     @Override
     public double computeCompactness()
     {
-        return getArea(globe) / getPerimeter(globe);
+        return getArea(Change.getGlobe()) / getPerimeter(Change.getGlobe());
     }
 
     @Override
@@ -172,28 +152,28 @@ public class Trigon implements Cell
         }
     }
 
-    public SurfacePolygon surfacePolygon()
-    {
-        List<LatLon> vertice = new ArrayList<>();
-        vertice.add(this.getTop());
-        vertice.add(this.getLeft());
-        vertice.add(this.getRight());
-
-        SurfacePolygon polygon = new SurfacePolygon(vertice);
-        polygon.setPathType(AVKey.GREAT_CIRCLE);
-
-        ShapeAttributes attributes = new BasicShapeAttributes();
-        attributes.setInteriorOpacity(0.0);
-//        attributes.setInteriorMaterial(new Material(Color.WHITE));
-        attributes.setOutlineMaterial(new Material(Color.PINK));
-        //attributes.setOutlineOpacity(0.5);
-        attributes.setOutlineWidth(1);
-//        attributes.setOutlineStippleFactor(1);
-//        attributes.setOutlineStipplePattern((short) 1000);
-        polygon.setAttributes(attributes);
-
-        return polygon;
-    }
+//    public SurfacePolygon surfacePolygon()
+//    {
+//        List<LatLon> vertice = new ArrayList<>();
+//        vertice.add(this.getTop());
+//        vertice.add(this.getLeft());
+//        vertice.add(this.getRight());
+//
+//        SurfacePolygon polygon = new SurfacePolygon(vertice);
+//        polygon.setPathType(AVKey.GREAT_CIRCLE);
+//
+//        ShapeAttributes attributes = new BasicShapeAttributes();
+//        attributes.setInteriorOpacity(0.0);
+////        attributes.setInteriorMaterial(new Material(Color.WHITE));
+//        attributes.setOutlineMaterial(new Material(Color.PINK));
+//        //attributes.setOutlineOpacity(0.5);
+//        attributes.setOutlineWidth(1);
+////        attributes.setOutlineStippleFactor(1);
+////        attributes.setOutlineStipplePattern((short) 1000);
+//        polygon.setAttributes(attributes);
+//
+//        return polygon;
+//    }
 
 //    /**
 //     * This method follows Wang Qian(2017)
@@ -330,7 +310,8 @@ public class Trigon implements Cell
 //            ", left=" + Change.getInstance().fromVec4(left).toString() +
 //            ", right=" + Change.getInstance().fromVec4(right).toString() +
 //            '}';
-        return geocode.substring(1, geocode.length()) + "\t" + this.getArea(globe) + "\t" + this.computeCompactness()
+        return geocode.substring(1, geocode.length()) + "\t" + this.getArea(Change.getGlobe()) + "\t"
+            + this.computeCompactness()
             + "\t";
     }
 
@@ -390,7 +371,7 @@ public class Trigon implements Cell
     @Override
     public Globe getGlobe()
     {
-        return globe;
+        return Change.getGlobe();
     }
 
     @Override

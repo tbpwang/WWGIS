@@ -36,7 +36,7 @@ public class PolygonData
 //                surfacePolygon = ((Trigon)(geocodeOrderTrigons[i][j])).surfacePolygon();
 //                surfacePolygon.setPathType(AVKey.GREAT_CIRCLE);
 //                surfacePolygon.setAttributes(attr);
-                polygons.add(((Trigon)(geocodeOrderTrigons[i][j])).surfacePolygon());
+                polygons.add(((Trigon)(geocodeOrderTrigons[i][j])).getSurfacePolygon());
             }
         }
     }

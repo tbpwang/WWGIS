@@ -66,7 +66,7 @@ public class Illustration extends ApplicationTemplate
             {
                 for (int j = 0; j < 4; j++)
                 {
-                   levels.add(((Trigon)trigon.subdivide().getChildren()[i].subdivide().getChildren()[j]).surfacePolygon());
+                   levels.add(((Trigon)trigon.subdivide().getChildren()[i].subdivide().getChildren()[j]).getSurfacePolygon());
                 }
             }
 
