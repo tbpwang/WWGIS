@@ -24,7 +24,7 @@ public class AppFrameImpl extends AbstractFeature implements AppFrame
 
     public AppFrameImpl(Registry registry)
     {
-        super("App Frame", Constants.APP_FRAME, registry);
+        super("EqualArcsApp Frame", Constants.APP_FRAME, registry);
     }
 
     public void initialize(final Controller controller)

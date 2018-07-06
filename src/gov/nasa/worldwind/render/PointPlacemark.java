@@ -1544,7 +1544,7 @@ public class PointPlacemark extends WWObjectImpl
     {
         if (this.getActiveAttributes().getImage() != null)
         {
-            // App has specified a buffered image.
+            // EqualArcsApp has specified a buffered image.
             return new BasicWWTexture(this.getActiveAttributes().getImage(), true);
         }
 

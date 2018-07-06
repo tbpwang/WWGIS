@@ -21,7 +21,7 @@ public class AppPanelImpl extends AbstractFeature implements AppPanel
 
     public AppPanelImpl(Registry registry)
     {
-        super("App Panel", Constants.APP_PANEL, registry);
+        super("EqualArcsApp Panel", Constants.APP_PANEL, registry);
 
         this.panel = new JPanel(new BorderLayout());
         this.panel.setPreferredSize(new Dimension(1280, 800));
