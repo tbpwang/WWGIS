@@ -22,7 +22,7 @@ import javax.swing.*;
  * @Function:
  * @Date: 2018/7/6
  */
-public class ClassIMidArcsView extends ApplicationTemplate
+public class MidArcsView extends ApplicationTemplate
 {
     public static class MidArcsAPP extends ApplicationTemplate.AppFrame
     {
@@ -52,8 +52,8 @@ public class ClassIMidArcsView extends ApplicationTemplate
             for (int i = 0; i < 8; i++)
             {
                 RenderableLayer midArcsLayer = new RenderableLayer();
-                Trigon trigon = (Trigon) Octant.getInstance().getFacet(i);
-                OctantMeshMidArcs mesh = new OctantMeshMidArcs(trigon, level);
+                Trigon octant = (Trigon) Octant.getInstance().getFacet(i);
+                OctantMeshMidArcs mesh = new OctantMeshMidArcs(octant, level);
                 SurfacePolygon[] polygons = new SurfacePolygon[(int) Math.pow(4, level)];
 
                 midArcsLayer.setName("Octant_" + i);

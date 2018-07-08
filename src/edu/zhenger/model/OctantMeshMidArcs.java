@@ -6,6 +6,7 @@
 
 package edu.zhenger.model;
 
+import edu.zhenger.Partition;
 import gov.nasa.worldwind.geom.LatLon;
 
 import java.util.*;
@@ -16,7 +17,7 @@ import java.util.*;
  * @Function:
  * @Date: 2018/7/6
  */
-public class OctantMeshMidArcs
+public class OctantMeshMidArcs implements Partition
 {
     private Trigon trigon;
     private int level;
@@ -53,7 +54,6 @@ public class OctantMeshMidArcs
             {
                 for (int k = 0; k < 4; k++)
                 {
-
                     tempList.add(j * 4 + k, subdivide(trigonList.get(j))[k]);
                 }
             }
@@ -67,7 +67,8 @@ public class OctantMeshMidArcs
         }
     }
 
-    private Trigon[] subdivide(Trigon trigon)
+    @Override
+    public Trigon[] subdivide(Trigon trigon)
     {
         Trigon[] children = new Trigon[4];
         if (trigon == null)

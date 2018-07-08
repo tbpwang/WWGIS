@@ -8,6 +8,8 @@ package edu.zhenger.model;
 
 import gov.nasa.worldwind.geom.LatLon;
 
+import java.util.*;
+
 /**
  * @Author: Wangzheng
  * @Email: tbpwang@gmail.com
@@ -21,6 +23,7 @@ public class OctantMeshEqualArcs
     private int level;
     //
     private Trigon[][] triangles;
+    private Trigon[] trigons;
 
     public OctantMeshEqualArcs(LatLon top, LatLon left, LatLon right, int level)
     {
@@ -67,6 +70,22 @@ public class OctantMeshEqualArcs
     public Trigon[][] getTriangles()
     {
         return triangles;
+    }
+
+    public Trigon[] getTrigons()
+    {
+        List<Trigon> trigonList = new ArrayList<>();
+        int counter = 0;
+        for (Trigon[] triangle : triangles)
+        {
+            for (Trigon aTriangle : triangle)
+            {
+                trigonList.add(counter++, aTriangle);
+//                counter = counter + 1;
+            }
+        }
+
+        return (Trigon[]) trigonList.toArray();
     }
 
     private void init()

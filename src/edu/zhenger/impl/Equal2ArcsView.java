@@ -8,6 +8,7 @@ package edu.zhenger.impl;
 
 import edu.zhenger.model.*;
 import gov.nasa.worldwind.layers.RenderableLayer;
+import gov.nasa.worldwind.render.SurfacePolygon;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 
 /**
@@ -16,7 +17,7 @@ import gov.nasa.worldwindx.examples.ApplicationTemplate;
  * @Function: Subsivision View with Class I and equal-arcs(two great circles)
  * @Date: 2018/7/6
  */
-public class ClassIEqual2ArcsView extends ApplicationTemplate
+public class Equal2ArcsView extends ApplicationTemplate
 {
     public static class EqualArcsApp extends ApplicationTemplate.AppFrame
     {
@@ -29,6 +30,30 @@ public class ClassIEqual2ArcsView extends ApplicationTemplate
             int frm = 3;
             int to = 5;
 
+            // One octant only
+            Trigon octant = (Trigon) Octant.getInstance().getFacet(0);
+            OctantMeshEqualArcs mesh = new OctantMeshEqualArcs(octant, level);
+            SurfacePolygon[] polygons = new SurfacePolygon[(int) Math.pow(4, level)];
+            RenderableLayer octantLayer = new RenderableLayer();
+            octantLayer.setName("Octant");
+            for (int j = 0; j < mesh.getTrigons().length; j++)
+            {
+                polygons[j] = mesh.getTrigons()[j].getSurfacePolygon();
+            }
+            for (SurfacePolygon polygon : polygons)
+            {
+                octantLayer.addRenderable(polygon);
+            }
+//            for (int i = 0; i < mesh.getTrigons().length; i++)
+//            {
+//                for (int j = 0; j < mesh.getTrigons()[i].length; j++)
+//                {
+//                    octantLayer.addRenderable(mesh.getTrigons()[i][j].getSurfacePolygon());
+//                }
+//            }
+            insertBeforeCompass(getWwd(),octantLayer);
+
+            // globe surface
             Trigon[] trigons = new Trigon[total];
             for (int i = frm; i < to; i++)
             {
@@ -44,12 +69,12 @@ public class ClassIEqual2ArcsView extends ApplicationTemplate
             {
                 layers[i] = new RenderableLayer();
                 layers[i].setName("Octant_" + i);
-                for (int j = 0; j < meshs[i].getTriangles().length; j++)
+                for (int j = 0; j < meshs[i].getTrigons().length; j++)
                 {
-                    for (int k = 0; k < meshs[i].getTriangles()[j].length; k++)
-                    {
-                        layers[i].addRenderable(meshs[i].getTriangles()[j][k].getSurfacePolygon());
-                    }
+//                    for (int k = 0; k < meshs[i].getTrigons()[j].length; k++)
+//                    {
+//                        layers[i].addRenderable(meshs[i].getTrigons()[j][k].getSurfacePolygon());
+//                    }
                 }
                 insertBeforeCompass(getWwd(), layers[i]);
             }
