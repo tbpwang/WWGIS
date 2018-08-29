@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * @Author: Wangzheng
  * @Email: tbpwang@gmail.com
- * @Function:
+ * @Function: Class I subdivision with mid-arcs, partition with recursion
  * @Date: 2018/7/6
  */
 public class OctantMeshMidArcs implements Partition
@@ -76,9 +76,9 @@ public class OctantMeshMidArcs implements Partition
             trigon = (Trigon) Octant.getInstance().getFacet(0);
         }
         LatLon top, left, right, t, l, r;
-        top = trigon.getTop();
-        left = trigon.getLeft();
-        right = trigon.getRight();
+        top = trigon.getTopV();
+        left = trigon.getLeftV();
+        right = trigon.getRightV();
         t = LatLon.interpolateGreatCircle(0.5f, left, right);
         r = LatLon.interpolateGreatCircle(0.5f, top, left);
         l = LatLon.interpolateGreatCircle(0.5f, right, top);

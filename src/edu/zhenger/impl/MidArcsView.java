@@ -9,12 +9,12 @@ package edu.zhenger.impl;
 import edu.zhenger.model.*;
 import gov.nasa.worldwind.formats.shapefile.*;
 import gov.nasa.worldwind.layers.RenderableLayer;
-import gov.nasa.worldwind.render.SurfacePolygon;
+import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
-import gov.nasa.worldwindx.examples.util.RandomShapeAttributes;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @Author: Wangzheng
@@ -24,9 +24,9 @@ import javax.swing.*;
  */
 public class MidArcsView extends ApplicationTemplate
 {
-    public static class MidArcsAPP extends ApplicationTemplate.AppFrame
+    public static class MidArcsApp extends ApplicationTemplate.AppFrame
     {
-        public MidArcsAPP()
+        public MidArcsApp()
         {
             super();
             int level = 7;
@@ -49,7 +49,7 @@ public class MidArcsView extends ApplicationTemplate
 //            insertBeforeCompass(getWwd(), midArcsLayer);
 
             // All globe is in gird
-            for (int i = 0; i < 8; i++)
+            for (int i = 3; i < 4; i++)
             {
                 RenderableLayer midArcsLayer = new RenderableLayer();
                 Trigon octant = (Trigon) Octant.getInstance().getFacet(i);
@@ -71,19 +71,27 @@ public class MidArcsView extends ApplicationTemplate
             // Add shapefile of test Zone
             ShapefileLayerFactory factory = new ShapefileLayerFactory();
 
-            final RandomShapeAttributes randomAttrs = new RandomShapeAttributes();
+            // attrs as one style
+            final ShapeAttributes attrs = new BasicShapeAttributes();
+//            attrs.setInteriorMaterial(new Material(new Color(150,100,200)));
+            attrs.setInteriorMaterial(new Material(new Color(50,150,50)));
+            attrs.setInteriorOpacity(0.99);
+            //as randomAttrs
+            //final RandomShapeAttributes randomAttrs = new RandomShapeAttributes();
             factory.setAttributeDelegate(new ShapefileRenderable.AttributeDelegate()
             {
                 @Override
                 public void assignAttributes(ShapefileRecord shapefileRecord,
                     ShapefileRenderable.Record renderableRecord)
                 {
-                    renderableRecord.setAttributes(randomAttrs.nextAttributes().asShapeAttributes());
+                    //renderableRecord.setAttributes(randomAttrs.nextAttributes().asShapeAttributes());
+                    renderableRecord.setAttributes(attrs);
                 }
             });
 
             // Load the shapefile. Define the completion callback.
             String shapefileSource = "src/edu/zhenger/data/testZone.shp";
+//            String shapefileSource = "src/edu/zhenger/data/China_District.shp";
 
             factory.createFromShapefileSource(shapefileSource,
                 new ShapefileLayerFactory.CompletionCallback()
@@ -103,9 +111,9 @@ public class MidArcsView extends ApplicationTemplate
                             public void run()
                             {
                                 // EsriShapefile.AppFrame.this.getWwd().getModel().setGlobe(Change.getGlobe());
-                                MidArcsAPP.this.getWwd().getModel().getLayers().add(layer);
-                                MidArcsAPP.this.layerPanel.updateLayers(
-                                    MidArcsAPP.this.getWwd());
+                                MidArcsApp.this.getWwd().getModel().getLayers().add(layer);
+                                MidArcsApp.this.layerPanel.updateLayers(
+                                    MidArcsApp.this.getWwd());
                             }
                         });
                     }
@@ -118,9 +126,10 @@ public class MidArcsView extends ApplicationTemplate
                 });
         }
 
-        public static void main(String[] args)
-        {
-            start("Class I Mid-Arcs", MidArcsAPP.class);
-        }
+
+    }
+    public static void main(String[] args)
+    {
+        start("Class I Mid-Arcs", MidArcsApp.class);
     }
 }

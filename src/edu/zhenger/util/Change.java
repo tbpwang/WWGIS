@@ -87,6 +87,16 @@ public final class Change implements DGGS
         if ((180 + lon) < sigma)
             lon = 180;
 
-        return LatLon.fromDegrees(lat,lon);
+        return LatLon.fromDegrees(lat, lon);
+    }
+
+    public static double radian2Degree(double radian)
+    {
+        return radian * 180.0 / Math.PI;
+    }
+
+    public static double degree2Radian(double degree)
+    {
+        return degree * Math.PI / 180.0;
     }
 }

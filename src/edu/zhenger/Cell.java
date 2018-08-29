@@ -21,9 +21,10 @@ public interface Cell extends MeasurableArea
     // shape and topology
     Vec4[] getVertex();
 
-//    LatLon getTop();
-//    LatLon getLeft();
-//    LatLon getRight();
+//    LatLon getTopV();
+//    LatLon getLeftV();
+//    LatLon getRightV();
+    LatLon[] getLatLons();
 
     Globe getGlobe();
 

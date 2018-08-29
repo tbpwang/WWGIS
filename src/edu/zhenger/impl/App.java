@@ -150,6 +150,7 @@ public class App extends ApplicationTemplate//EsriShapefile
             SurfacePolyline polyline = new SurfacePolyline(latLons);
             polyline.setAttributes(attributes);
             polyline.setPathType(AVKey.GREAT_CIRCLE);
+//            polyline.setPathType(AVKey.RHUMB_LINE);
 
             layer.setName("Level One");
             layer.addRenderable(polyline);

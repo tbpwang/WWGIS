@@ -70,9 +70,6 @@ public class Illustration extends ApplicationTemplate
                 }
             }
 
-
-
-
             return levels;
         }
     }

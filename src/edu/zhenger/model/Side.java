@@ -38,9 +38,9 @@ public class Side extends SurfacePolyline
         arcs.setPathType(pathType);
 
         List<LatLon> list = new ArrayList<>();
-        list.add(trigon.getTop());
-        list.add(trigon.getLeft());
-        list.add(trigon.getRight());
+        list.add(trigon.getTopV());
+        list.add(trigon.getLeftV());
+        list.add(trigon.getRightV());
         arcs.setLocations(list);
         arcs.setClosed(true);
 

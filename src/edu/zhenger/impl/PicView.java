@@ -275,9 +275,9 @@ public class PicView extends ApplicationTemplate
 //        triangle2 = new Trilateral(edge4,edge5,edge1,"1",1);
 
         Vertex vertex1,vertex2,vertex0;
-        vertex0 = new Vertex(((Trigon)Octant.getInstance().getFacet(0)).getTop(),"A");
-        vertex1 = new Vertex(((Trigon)Octant.getInstance().getFacet(0)).getLeft(),"B");
-        vertex2 = new Vertex(((Trigon)Octant.getInstance().getFacet(0)).getRight(),"C");
+        vertex0 = new Vertex(((Trigon)Octant.getInstance().getFacet(0)).getTopV(),"A");
+        vertex1 = new Vertex(((Trigon)Octant.getInstance().getFacet(0)).getLeftV(),"B");
+        vertex2 = new Vertex(((Trigon)Octant.getInstance().getFacet(0)).getRightV(),"C");
 //        vertex1 = new Vertex(Change.fromVec4(Octant.getInstance().getFacet(0).getVertex()[0]),"0");
 //        vertex2 = new Vertex(Change.fromVec4(Octant.getInstance().getFacet(0).getVertex()[1]),"1");
 //        vertex3 = new Vertex(Change.fromVec4(Octant.getInstance().getFacet(0).getVertex()[2]),"2");

@@ -27,8 +27,20 @@ public class Octant implements Polyhedron
 
     private Vec4 vec4A, vec4B, vec4C, vec4D, vec4E, vec4F;
 
+    private Cell[] cells;
+
     private Octant()
     {
+        cells = new Cell[8];
+        cells[0]= new Trigon(LatLon.fromDegrees(90,-180),LatLon.fromDegrees(0,-180),LatLon.fromDegrees(0,-90),"0");
+        cells[1]= new Trigon(LatLon.fromDegrees(90,-90),LatLon.fromDegrees(0,-90),LatLon.fromDegrees(0,0),"1");
+        cells[2]= new Trigon(LatLon.fromDegrees(90,0),LatLon.fromDegrees(0,0),LatLon.fromDegrees(0,90),"2");
+        cells[3]= new Trigon(LatLon.fromDegrees(90,90),LatLon.fromDegrees(0,90),LatLon.fromDegrees(0,180),"3");
+        cells[4]= new Trigon(LatLon.fromDegrees(-90,-180),LatLon.fromDegrees(0,-180),LatLon.fromDegrees(0,-90),"4");
+        cells[5]= new Trigon(LatLon.fromDegrees(-90,-90),LatLon.fromDegrees(0,-90),LatLon.fromDegrees(0,0),"5");
+        cells[6]= new Trigon(LatLon.fromDegrees(-90,0),LatLon.fromDegrees(0,0),LatLon.fromDegrees(0,90),"6");
+        cells[7]= new Trigon(LatLon.fromDegrees(-90,90),LatLon.fromDegrees(0,90),LatLon.fromDegrees(0,180),"7");
+
         double r = Change.getGlobe().getRadius();
         // Vec4
         // y faces to North
@@ -63,14 +75,69 @@ public class Octant implements Polyhedron
     @Override
     public Cell getFacet(int ID)
     {
-        if (ID < 0 || ID > 7)
-        {
-            throw new Mistake("IDIsExcess");
-        }
-        Vec4[] vertex = getVertex()[ID];
-        LatLon top = Change.fromVec4(vertex[0]);
-        LatLon left = Change.fromVec4(vertex[1]);
-        LatLon right = Change.fromVec4(vertex[2]);
-        return new Trigon(top, left, right, String.valueOf(ID));
+//        LatLon top;
+//        LatLon left;
+//        LatLon right;
+//        if (ID == 0)
+//        {
+//            top = LatLon.fromDegrees(90,-180);
+//            left = LatLon.fromDegrees(0,-180);
+//            right = LatLon.fromDegrees(0,-90);
+//            cells[ID] =  new Trigon(top, left, right, String.valueOf(ID));
+//        }
+//        else if (ID == 1)
+//        {
+//            top = LatLon.fromDegrees(90,-90);
+//            left = LatLon.fromDegrees(0,-90);
+//            right = LatLon.fromDegrees(0,0);
+//            cells[ID] =  new Trigon(top, left, right, String.valueOf(ID));
+//        }
+//        else if (ID == 2)
+//        {
+//            top = LatLon.fromDegrees(90,0);
+//            left = LatLon.fromDegrees(0,0);
+//            right = LatLon.fromDegrees(0,90);
+//            cells[ID] =  new Trigon(top, left, right, String.valueOf(ID));
+//        }
+//        else if (ID == 3)
+//        {
+//            top = LatLon.fromDegrees(90, 90);
+//            left = LatLon.fromDegrees(0, 90);
+//            right = LatLon.fromDegrees(0, 180);
+//            cells[ID] =  new Trigon(top, left, right, String.valueOf(ID));
+//        }
+//        else if (ID == 4)
+//        {
+//            top = LatLon.fromDegrees(-90,-180);
+//            left = LatLon.fromDegrees(0,-180);
+//            right = LatLon.fromDegrees(0,-90);
+//            cells[ID] =  new Trigon(top, left, right, String.valueOf(ID));
+//        }
+//        else if (ID == 5)
+//        {
+//            top = LatLon.fromDegrees(-90,-90);
+//            left = LatLon.fromDegrees(0,-90);
+//            right = LatLon.fromDegrees(0,0);
+//            cells[ID] =  new Trigon(top, left, right, String.valueOf(ID));
+//        }
+//        else if (ID == 6)
+//        {
+//            top = LatLon.fromDegrees(-90,0);
+//            left = LatLon.fromDegrees(0,0);
+//            right = LatLon.fromDegrees(0,90);
+//            cells[ID] =  new Trigon(top, left, right, String.valueOf(ID));
+//        }
+//        else if (ID == 7)
+//        {
+//            top = LatLon.fromDegrees(-90, 90);
+//            left = LatLon.fromDegrees(0, 90);
+//            right = LatLon.fromDegrees(0, 180);
+//            cells[ID] =  new Trigon(top, left, right, String.valueOf(ID));
+//        }
+//        else
+//        {
+//            throw new Mistake("IDIsExcess");
+//        }
+        return cells[ID];
     }
 }

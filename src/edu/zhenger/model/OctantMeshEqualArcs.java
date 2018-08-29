@@ -47,17 +47,17 @@ public class OctantMeshEqualArcs
     public OctantMeshEqualArcs(Trigon trigon, int level)
     {
         this.level = level;
-        p1 = trigon.getLeft();
-        p2 = trigon.getRight();
-        if (Math.abs(trigon.getTop().latitude.getDegrees()) - 90 < Math.pow(10, -10))
+        p1 = trigon.getLeftV();
+        p2 = trigon.getRightV();
+        if (Math.abs(trigon.getTopV().latitude.getDegrees()) - 90 < Math.pow(10, -10))
         {
-            p10 = LatLon.fromDegrees(trigon.getTop().latitude.degrees, p1.longitude.degrees);
-            p20 = LatLon.fromDegrees(trigon.getTop().latitude.degrees, p2.longitude.degrees);
+            p10 = LatLon.fromDegrees(trigon.getTopV().latitude.degrees, p1.longitude.degrees);
+            p20 = LatLon.fromDegrees(trigon.getTopV().latitude.degrees, p2.longitude.degrees);
         }
         else
         {
-            p10 = trigon.getTop();
-            p20 = trigon.getTop();
+            p10 = trigon.getTopV();
+            p20 = trigon.getTopV();
         }
         init();
     }

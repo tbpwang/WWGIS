@@ -384,11 +384,11 @@ public class QTM implements Grid
             int r2 = this.computeRanks(cell2).getRow();
             if (r1 == r2)
             {
-                p2 = LatLon.interpolateGreatCircle(0.5, ((Trigon) cell1).getTop(), ((Trigon) cell2).getTop());
+                p2 = LatLon.interpolateGreatCircle(0.5, ((Trigon) cell1).getTopV(), ((Trigon) cell2).getTopV());
             }
             else
             {
-                p2 = LatLon.interpolateGreatCircle(0.5, ((Trigon) cell1).getLeft(), ((Trigon) cell2).getRight());
+                p2 = LatLon.interpolateGreatCircle(0.5, ((Trigon) cell1).getLeftV(), ((Trigon) cell2).getRightV());
             }
             vec41 = Change.fromLatLon(p1);
             vec42 = Change.fromLatLon(p2);
